@@ -135,7 +135,12 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map(mod => {
+      return {
+        mod: mod.mod,
+        studentsPerInstructor: mod.students/mod.instructors
+      };
+    });
     return result;
 
     // Annotation:
@@ -170,7 +175,12 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(cake => {
+      return { 
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock
+      };
+    });
     return result;
 
     // Annotation:
@@ -198,7 +208,7 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => cake.inStock > 0);
     return result;
 
     // Annotation:
@@ -209,7 +219,10 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, currentEl) => {
+      acc += currentEl.inStock;
+      return acc;
+    }, 0);
     return result;
 
     // Annotation:
@@ -221,8 +234,17 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = cakes.reduce((acc, currEl) => {currEl.toppings.forEach(topping => {
+      console.log(topping);
+      if (!acc.includes(topping)) {
+        acc.push(topping);
+      } else {
+        return;
+      }
+    });
+    return acc;
+    }, []);
+    return result; 
 
     // Annotation:
     // Write your annotation here as a comment
@@ -239,7 +261,16 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, currTopping) => {
+      currTopping.toppings.forEach(topping => {
+        if(!acc[topping]) {
+          acc[topping] = 1;
+        } else {
+          acc[topping] += 1;
+        }
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
@@ -274,7 +305,7 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(rooms => rooms.program === 'FE');
     return result;
 
     // Annotation:
