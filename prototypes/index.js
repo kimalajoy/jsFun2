@@ -478,7 +478,15 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park) => {
+      if(!park.visited === true) {
+        acc.parksToVisit.push(park.name);
+      } else {
+        acc.parksVisited.push(park.name);
+      }
+      return acc;
+    }, {parksToVisit: [], parksVisited: []});
+    
     return result;
 
     // Annotation:
