@@ -223,9 +223,12 @@ const cakePrompts = {
       acc += currentEl.inStock;
       return acc;
     }, 0);
+
     return result;
 
     // Annotation:
+    // return a number
+    // probably want a reduce
     // Write your annotation here as a comment
   },
 
@@ -320,7 +323,15 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce((acc, curEl) => {
+      if(curEl.program === 'FE') {
+        acc.feCapacity += curEl.capacity;
+      } else {
+        acc.beCapacity += curEl.capacity;
+      }
+      return acc;
+    }, {feCapacity: 0, beCapacity: 0});
+    
     return result;
 
     // Annotation:
@@ -330,7 +341,8 @@ const classPrompts = {
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => 
+      a.capacity - b.capacity);
     return result;
 
     // Annotation:
@@ -357,7 +369,9 @@ const bookPrompts = {
     //   'Catch-22', 'Treasure Island']
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => 
+      book.genre != 'Horror' &&  book.genre != 'True Crime').map(title => title.title);
+    
     return result;
 
     // Annotation:
@@ -372,7 +386,12 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => 
+      book.published >= 1990).map(title => {
+      return {
+        title: title.title, year: title.published
+      };
+    });
     return result;
 
     // Annotation:
@@ -395,7 +414,9 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result =  weather.map(temps => {
+      return ((temps.temperature.high + temps.temperature.low) / 2);
+    });
     return result;
 
     // Annotation:
@@ -409,11 +430,14 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.filter(sun => 
+      sun.type == 'sunny' || sun.type == 'mostly sunny').map(location => {
+      return `${location.location} is ${location.type}.`;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // the punctuation is what will get ya!
   },
 
   findHighestHumidity() {
@@ -425,11 +449,13 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = weather.sort((a, b) => 
+      b.humidity - a.humidity
+    );
+    return result[0];
 
     // Annotation:
-    // Write your annotation here as a comment
+    // sort and filter don't need the curlies
 
   }
 };
