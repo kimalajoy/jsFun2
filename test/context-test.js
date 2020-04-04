@@ -40,7 +40,7 @@ describe("CONTEXT", () => {
   }), it("exerciseG", () => {
     const e = "global window object" == context.exerciseG();
     expect(e).withMessage("Your result is not the correct context").to.be.true
-  }), it("exerciseH", () => {
+  }), it.only("exerciseH", () => {
     const e = "obj" == context.exerciseH();
     expect(e).withMessage("Your result is not the correct context").to.be.true
   }), it("exerciseI", () => {

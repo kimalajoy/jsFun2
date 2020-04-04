@@ -503,7 +503,14 @@ const nationalParksPrompts = {
     // { Florida: 'Everglades' } ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park) => {
+      let parkObj = {};
+      if(!acc[park.location]) {
+        parkObj[park.location] = park.name;
+      }
+      acc.push(parkObj);
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
