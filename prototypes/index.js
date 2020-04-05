@@ -99,11 +99,25 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((acc, club) => {
+      club.members.forEach(member => {
+        if(!acc[member]) {
+          acc[member] = [];
+        }
+        acc[member].push(club.club);
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I am given an array of objects
+    // I need to return an object
+    // I will need to iterate over the members array as well as the clubs array
+    // I can probably use a reduce and maybe a forEach within
+    // I want to use reduce on the club prompt and then for each club member I want to use forEach to iterate over them
+  
+
   }
 };
 
@@ -533,8 +547,17 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = nationalParks.reduce((acc, park) => {
+      park.activities.forEach(activity => {
+        // if (!acc.includes(activity)) {
+        //   acc.push(activity);
+        // } 
+        acc[activity] = null;
+      });
+      return acc;
+    }, {});
+    //console.log(result);
+    return Object.keys(result);
 
     // Annotation:
     // Write your annotation here as a comment
